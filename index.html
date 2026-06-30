@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡El plato saludable! 🍎🥦</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="header-title-container">
+                <h1>🍽️ ¡El plato saludable!</h1>
+                <p>Aprende a comer sano y limpio</p>
+            </div>
+            <button id="sound-btn" class="sound-toggle-btn" title="Activar/Desactivar Sonido">🔊</button>
+        </header>
+
+        <main style="flex: 1; display: flex; flex-direction: column;">
+            <!-- PANTALLA DE BIENVENIDA -->
+            <section id="welcome-screen" class="screen">
+                <div class="welcome-character">
+                    <!-- Cute Apple SVG as Welcome Character -->
+                    <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
+                        <path d="M50 35 C40 20 20 25 20 45 C20 70 45 85 50 85 C55 85 80 70 80 45 C80 25 60 20 50 35 Z" fill="#FF5252"/>
+                        <path d="M50 30 Q53 15 62 12" stroke="#795548" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M54 22 C62 20 68 28 60 30 C56 31 54 26 54 22 Z" fill="#8BC34A"/>
+                        <!-- Big eyes for preschool appeal -->
+                        <circle cx="36" cy="46" r="6" fill="#333"/>
+                        <circle cx="34" cy="43" r="2.5" fill="#FFF"/>
+                        <circle cx="64" cy="46" r="6" fill="#333"/>
+                        <circle cx="62" cy="43" r="2.5" fill="#FFF"/>
+                        <!-- Pink cheeks -->
+                        <circle cx="30" cy="54" r="5" fill="#FF8A80" opacity="0.8"/>
+                        <circle cx="70" cy="54" r="5" fill="#FF8A80" opacity="0.8"/>
+                        <!-- Happy smile -->
+                        <path d="M44 56 Q50 64 56 56" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <!-- Cute little chef hat -->
+                        <path d="M35 15 C35 8, 45 5, 50 10 C55 5, 65 8, 65 15 C65 20, 35 20, 35 15 Z" fill="#FFF" stroke="#CFD8DC" stroke-width="2"/>
+                        <rect x="40" y="16" width="20" height="6" fill="#FFF" stroke="#CFD8DC" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h2>¡Hola Amiguito!</h2>
+                <p>Vamos a jugar a armar nuestro plato saludable y aprender a cuidar nuestro cuerpo. ¡Haz clic en el botón de abajo para empezar!</p>
+                <button id="start-btn" class="big-btn">¡Jugar! ▶️</button>
+            </section>
+
+            <!-- FASE 1: ARRASTRAR ALIMENTOS AL PLATO -->
+            <section id="game-screen" class="screen hidden">
+                <div class="voice-hint">
+                    <span>🔊</span>
+                    <strong id="instruction-text">Arrastra la comida saludable al plato y la bebida al vaso. ¡Deja fuera la comida chatarra!</strong>
+                </div>
+
+                <div class="game-layout">
+                    <!-- Panel de Comidas -->
+                    <div class="food-source-panel">
+                        <h3>🍎 ¿Qué alimentos elegimos? 🥦</h3>
+                        <div id="food-grid" class="food-grid">
+                            <!-- Cards populated dynamically via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Mesa de Comer / Plato y Vaso -->
+                    <div class="dining-area">
+                        <div class="dining-targets">
+                            <!-- Plato Saludable -->
+                            <div id="plate-target" class="plate-target">
+                                <div class="plate-grid">
+                                    <div class="plate-line-h"></div>
+                                    <div class="plate-line-v"></div>
+                                </div>
+                                <span class="plate-label label-fruits">Frutas</span>
+                                <span class="plate-label label-vegetables">Verduras</span>
+                                <span class="plate-label label-grains">Cereales</span>
+                                <span class="plate-label label-proteins">Proteínas</span>
+                                
+                                <div id="plate-items" class="plate-items-container"></div>
+                            </div>
+
+                            <!-- Vaso Saludable -->
+                            <div id="glass-target" class="glass-target">
+                                <div id="glass-fill" class="glass-fill"></div>
+                                <span class="glass-label">Tu Vaso</span>
+                            </div>
+                        </div>
+
+                        <!-- Botón para avanzar cuando se complete el plato -->
+                        <button id="to-phase2-btn" class="big-btn hidden" style="margin-top: 25px; padding: 12px 30px; font-size: 1.4rem;">¡Siguiente paso! ➡️</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FASE 2: HÁBITOS DE HIGIENE -->
+            <section id="hygiene-screen" class="screen hidden">
+                <div class="voice-hint">
+                    <span>🔊</span>
+                    <strong>¡Casi listo para comer! ¿Qué debemos hacer ANTES de comer? Elige las 4 acciones correctas.</strong>
+                </div>
+                <h2>🚿 ¡Hora de la Limpieza! 🧼</h2>
+                <p>Elige las acciones correctas para comer seguro y limpio:</p>
+                
+                <div id="hygiene-grid" class="hygiene-grid">
+                    <!-- Hygiene cards will be rendered here -->
+                </div>
+
+                <button id="finish-btn" class="big-btn hidden">¡Terminar! 🏆</button>
+            </section>
+
+            <!-- PANTALLA DE GANADOR -->
+            <section id="win-screen" class="screen hidden">
+                <canvas id="celebration-canvas"></canvas>
+                <h2>🎉 ¡Excelente! 🎉</h2>
+                <p>¡Eres un campeón de la alimentación saludable! Cuidas tu salud comiendo alimentos nutritivos y manteniendo tus manitas y comida limpias.</p>
+                <button id="restart-btn" class="big-btn">Jugar de Nuevo 🔄</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast for feedback notifications -->
+    <div id="feedback-toast" class="feedback-toast">
+        <span id="toast-icon">✨</span>
+        <span id="toast-message">¡Muy bien!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
